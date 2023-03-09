@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  mariadb:
+    image: mariadb
+    restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
+  homeapp:
+    image: ${DOCKER_REGISTRY-}homeapp
+    build:
+      context: .
+      dockerfile: HomeApp/Dockerfile
+volumes:
+  mariadb_data:

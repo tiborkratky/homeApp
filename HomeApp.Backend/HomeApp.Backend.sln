@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeApp", "HomeApp\HomeApp.csproj", "{6B4D4FE0-8818-44FF-BE25-8CAF8E126133}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeApp.ApiCore", "HomeApp.ApiCore\HomeApp.ApiCore.csproj", "{3AE864A7-4DF3-47FA-99DB-8276F0E333BD}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1BE329A0-B90C-4F6A-9C6D-A415C8DC8231}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B4D4FE0-8818-44FF-BE25-8CAF8E126133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B4D4FE0-8818-44FF-BE25-8CAF8E126133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B4D4FE0-8818-44FF-BE25-8CAF8E126133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B4D4FE0-8818-44FF-BE25-8CAF8E126133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE864A7-4DF3-47FA-99DB-8276F0E333BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE864A7-4DF3-47FA-99DB-8276F0E333BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE864A7-4DF3-47FA-99DB-8276F0E333BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE864A7-4DF3-47FA-99DB-8276F0E333BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1BE329A0-B90C-4F6A-9C6D-A415C8DC8231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1BE329A0-B90C-4F6A-9C6D-A415C8DC8231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1BE329A0-B90C-4F6A-9C6D-A415C8DC8231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1BE329A0-B90C-4F6A-9C6D-A415C8DC8231}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
