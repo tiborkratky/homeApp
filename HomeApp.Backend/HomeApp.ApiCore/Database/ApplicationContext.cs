@@ -13,5 +13,6 @@ namespace HomeApp.ApiCore.Database
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Meal> Meals { get; set; }
     }
 }
