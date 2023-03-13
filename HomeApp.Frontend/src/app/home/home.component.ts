@@ -1,10 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { CoreModule } from 'src/core/core.module';
+import { MealModule } from '../meal/meal.module';
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  standalone: true,
+  imports: [CommonModule, CoreModule, MealModule],
+  template: '<meal-list></meal-list>',
+  styles: ['.container {display: none}'],
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}

@@ -5,7 +5,7 @@ import { MealListComponent } from './meal-list/meal-list.component';
 const routes: Routes = [{ path: '', component: MealListComponent }];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class MealRoutingModule {}

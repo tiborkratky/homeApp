@@ -11,12 +11,12 @@ import {
 import { faFacebook, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { AppComponent } from 'src/app/app.component';
 import { RegisterComponent } from './register/register.component';
+import { BannerComponent } from './banner/banner.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, LoginComponent, RegisterComponent],
+  declarations: [HeaderComponent, FooterComponent, LoginComponent, RegisterComponent, BannerComponent],
   imports: [CommonModule, RouterLink, RouterLinkActive, FontAwesomeModule],
-  exports: [HeaderComponent, FooterComponent, LoginComponent],
-  bootstrap: [AppComponent],
+  exports: [HeaderComponent, FooterComponent, LoginComponent, RegisterComponent, BannerComponent]
 })
 export class CoreModule {
   constructor(library: FaIconLibrary) {
