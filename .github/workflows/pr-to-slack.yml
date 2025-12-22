@@ -13,8 +13,8 @@ jobs:
       - name: Send Slack message
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel-id: 'C0A47M3V90B'  # Replace with your Slack channel ID
-          text: |
+          channel-id: 'C0A47M3V90B'  # Your Slack channel ID
+          slack-message: |
             :bell: *New PR opened* in <${{ github.event.repository.html_url }}|${{ github.event.repository.name }}>
             *Title:* ${{ github.event.pull_request.title }}
             *Author:* ${{ github.event.pull_request.user.login }}
