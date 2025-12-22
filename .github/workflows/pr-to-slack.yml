@@ -62,24 +62,40 @@ jobs:
         if: ${{ github.event_name != 'pull_request' || github.event.action != 'opened' }}
         run: echo "Slack ts: ${{ steps.get_ts.outputs.result }}"
 
-      # Step 5: Add reaction for approval
+      # Step 5: Add approval reaction
       - name: Add approval reaction
-        if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && steps.get_ts.outputs.result != '' }}
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: 'C0A47M3V90B'
-          reaction-name: 'white_check_mark'
-          ts: ${{ steps.get_ts.outputs.result }}
+        if: ${{ github.event_name == 'pull_request_review' }}
+        run: |
+          if [ -n "${{ steps.get_ts.outputs.result }}" ] && [ "${{ github.event.review.state }}" == "approved" ]; then
+            echo "Adding :white_check_mark: reaction"
+            gh run api \
+              -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+              -X POST \
+              -F channel='C0A47M3V90B' \
+              -F name='white_check_mark' \
+              -F timestamp='${{ steps.get_ts.outputs.result }}' \
+              https://slack.com/api/reactions.add
+          else
+            echo "Skipping reaction"
+          fi
         env:
           SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
 
-      # Step 6: Add reaction for comment
+      # Step 6: Add comment reaction
       - name: Add comment reaction
-        if: ${{ github.event_name == 'issue_comment' && steps.get_ts.outputs.result != '' }}
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: 'C0A47M3V90B'
-          reaction-name: 'speech_balloon'
-          ts: ${{ steps.get_ts.outputs.result }}
+        if: ${{ github.event_name == 'issue_comment' }}
+        run: |
+          if [ -n "${{ steps.get_ts.outputs.result }}" ]; then
+            echo "Adding :speech_balloon: reaction"
+            gh run api \
+              -H "Authorization: Bearer $SLACK_BOT_TOKEN" \
+              -X POST \
+              -F channel='C0A47M3V90B' \
+              -F name='speech_balloon' \
+              -F timestamp='${{ steps.get_ts.outputs.result }}' \
+              https://slack.com/api/reactions.add
+          else
+            echo "Skipping reaction"
+          fi
         env:
           SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
