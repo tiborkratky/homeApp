@@ -3,6 +3,7 @@ name: PR Notification to Slack
 on:
   pull_request:
     types: [opened]
+  workflow_dispatch:     # Allows manual testing
 
 jobs:
   notify-slack:
