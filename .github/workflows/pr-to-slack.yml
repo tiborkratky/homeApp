@@ -3,10 +3,6 @@ name: PR Notification to Slack
 on:
   pull_request:
     types: [opened]
-  pull_request_review:
-    types: [submitted]
-  issue_comment:
-    types: [created]
   workflow_dispatch:
 
 jobs:
