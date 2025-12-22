@@ -7,7 +7,7 @@ on:
     types: [submitted]
   issue_comment:
     types: [created]
-  workflow_dispatch:   # Optional manual trigger
+  workflow_dispatch:
 
 jobs:
   slack-pr:
@@ -18,10 +18,10 @@ jobs:
       # Step 1: Post Slack message when PR is opened
       - name: Post PR message
         id: post_slack
-        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel-id: 'C0A47M3V90B'  # Your Slack channel ID
+          channel-id: 'C0A47M3V90B'
           slack-message: |
             :bell: *New PR opened in repository:* ${{ github.event.repository.name }}
             *Title:* ${{ github.event.pull_request.title }}
@@ -32,7 +32,7 @@ jobs:
 
       # Step 2: Save Slack ts in PR comment
       - name: Save Slack ts in PR comment
-        if: github.event_name == 'pull_request' && github.event.action == 'opened'
+        if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -42,7 +42,7 @@ jobs:
 
       # Step 3: Get Slack ts from PR comment for reactions
       - name: Get Slack ts from PR comment
-        if: github.event_name != 'pull_request' || github.event.action != 'opened'
+        if: ${{ github.event_name != 'pull_request' || github.event.action != 'opened' }}
         id: get_ts
         uses: actions/github-script@v7
         with:
@@ -57,14 +57,14 @@ jobs:
             return tsComment ? tsComment.body.replace("SLACK_TS=", "") : "";
           result-encoding: string
 
-      # Step 4: Debug ts (optional)
+      # Step 4: Debug ts
       - name: Debug Slack ts
-        if: github.event_name != 'pull_request' || github.event.action != 'opened'
+        if: ${{ github.event_name != 'pull_request' || github.event.action != 'opened' }}
         run: echo "Slack ts: ${{ steps.get_ts.outputs.result }}"
 
       # Step 5: Add reaction for approval
       - name: Add approval reaction
-        if: github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && steps.get_ts.outputs.result != ''
+        if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' && steps.get_ts.outputs.result != '' }}
         uses: slackapi/slack-github-action@v1.26.0
         with:
           channel-id: 'C0A47M3V90B'
@@ -75,7 +75,7 @@ jobs:
 
       # Step 6: Add reaction for comment
       - name: Add comment reaction
-        if: github.event_name == 'issue_comment' && steps.get_ts.outputs.result != ''
+        if: ${{ github.event_name == 'issue_comment' && steps.get_ts.outputs.result != '' }}
         uses: slackapi/slack-github-action@v1.26.0
         with:
           channel-id: 'C0A47M3V90B'
