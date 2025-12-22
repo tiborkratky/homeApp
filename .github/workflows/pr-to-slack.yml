@@ -10,14 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
-      # Step 1: Post Slack message when PR is opened
+      # Step: Post Slack message when PR is opened
       - name: Post PR message
         id: post_slack
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
         uses: slackapi/slack-github-action@v1.26.0
         with:
-          channel-id: 'C0A47M3V90B'
+          channel-id: C0A47M3V90B
           slack-message: |
             :bell: New PR opened in repository: ${{ github.event.repository.name }}${{ contains(github.event.pull_request.title, '- sprint goal') && ' - sprint goal :alarm:' || '' }}
             *Title:* ${{ github.event.pull_request.title }}
