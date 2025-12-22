@@ -30,12 +30,12 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
 
-      - name: React to PR approval
+      - name: Add approval reaction
         if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' }}
-        uses: slackapi/slack-github-action@v1.26.0
-        with:
-          channel-id: 'C0A47M3V90B'
-          reaction-name: 'white_check_mark'
-          ts: ${{ steps.post_slack.outputs.ts }}
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CHATBOT }}" \
+            -H "Content-type: application/json" \
+            --data '{"channel":"C0A47M3V90B","name":"white_check_mark","timestamp":"<TS_FROM_PREVIOUS_STEP>"}' \
+            https://slack.com/api/reactions.add
+
