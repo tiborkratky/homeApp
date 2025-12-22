@@ -30,12 +30,11 @@ jobs:
         env:
           SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
 
-      # Step 2: Save Slack ts in PR comment
       - name: Save Slack ts in PR comment
         if: ${{ github.event_name == 'pull_request' && github.event.action == 'opened' }}
         uses: peter-evans/create-or-update-comment@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
           issue-number: ${{ github.event.pull_request.number }}
           body: "SLACK_TS=${{ steps.post_slack.outputs.ts }}"
           edit-mode: replace
