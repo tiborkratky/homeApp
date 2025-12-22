@@ -23,19 +23,11 @@ jobs:
         with:
           channel-id: 'C0A47M3V90B'
           slack-message: |
-            :bell: *New PR opened in repository:* ${{ github.event.repository.name }}
+            :bell: New PR opened in repository: ${{ github.event.repository.name }}${{ contains(github.event.pull_request.title, '- sprint goal') && ' - sprint goal :alarm:' || '' }}
             *Title:* ${{ github.event.pull_request.title }}
             *Author:* ${{ github.event.pull_request.user.login }}
             *Link:* ${{ github.event.pull_request.html_url }}
         env:
           SLACK_BOT_TOKEN: ${{ secrets.CHATBOT }}
 
-      - name: Add approval reaction
-        if: ${{ github.event_name == 'pull_request_review' && github.event.review.state == 'approved' }}
-        run: |
-          curl -X POST \
-            -H "Authorization: Bearer ${{ secrets.CHATBOT }}" \
-            -H "Content-type: application/json" \
-            --data '{"channel":"C0A47M3V90B","name":"white_check_mark","timestamp":"<TS_FROM_PREVIOUS_STEP>"}' \
-            https://slack.com/api/reactions.add
 
