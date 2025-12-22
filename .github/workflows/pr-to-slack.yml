@@ -57,10 +57,14 @@ jobs:
             return tsComment ? tsComment.body.replace("SLACK_TS=", "") : "";
           result-encoding: string
 
-      # Step 4: Debug ts
       - name: Debug Slack ts
         if: ${{ github.event_name != 'pull_request' || github.event.action != 'opened' }}
-        run: echo "Slack ts: ${{ steps.get_ts.outputs.result }}"
+        run: |
+          echo "Slack ts: $STEP_TS"
+        env:
+          STEP_TS: ${{ steps.get_ts.outputs.result }}
+
+
 
       # Step 5: Add approval reaction
       - name: Add approval reaction
