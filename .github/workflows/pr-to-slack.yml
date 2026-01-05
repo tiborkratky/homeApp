@@ -1,6 +1,6 @@
 name: PR Notification to Slack
 
-on:
+'on':
   pull_request:
     types: [opened]
   workflow_dispatch:
